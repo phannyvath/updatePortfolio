@@ -10,16 +10,16 @@ export default {
         // Cyberpunk palette tuned to purple / yellow / red
         cyber: {
           // Primary neon accents
-          cyan: '#facc15', // repurposed as neon yellow
-          blue: '#a855f7', // repurposed as neon purple
-          magenta: '#fb7185', // repurposed as neon red
-          purple: '#c084fc',
-          green: '#facc15', // route “green” usages to yellow
-          red: '#fb7185',
+          cyan: 'var(--cyber-cyan)', // repurposed as neon yellow
+          blue: 'var(--cyber-blue)', // repurposed as neon purple
+          magenta: 'var(--cyber-magenta)', // repurposed as neon red
+          purple: 'var(--cyber-purple)',
+          green: 'var(--cyber-green)', // route “green” usages to yellow
+          red: 'var(--cyber-red)',
           // Backgrounds
-          dark: '#05030a',
-          darker: '#020107',
-          navy: '#12051f',
+          dark: 'var(--cyber-dark)',
+          darker: 'var(--cyber-darker)',
+          navy: 'var(--cyber-navy)',
         },
       },
       fontFamily: {
@@ -27,11 +27,10 @@ export default {
         mono: ['Share Tech Mono', 'monospace'],
       },
       boxShadow: {
-        // Neon glows mapped to the new palette
-        'neon-cyan': '0 0 10px #facc15, 0 0 20px #facc15, 0 0 30px #facc15', // yellow
-        'neon-magenta': '0 0 10px #fb7185, 0 0 20px #fb7185, 0 0 30px #fb7185', // red
-        'neon-blue': '0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 30px #a855f7', // purple
-        'glow': '0 0 20px rgba(250, 204, 21, 0.5)', // soft yellow glow
+        'neon-cyan': '0 0 10px var(--cyber-cyan), 0 0 20px var(--cyber-cyan), 0 0 30px var(--cyber-cyan)',
+        'neon-magenta': '0 0 10px var(--cyber-magenta), 0 0 20px var(--cyber-magenta), 0 0 30px var(--cyber-magenta)',
+        'neon-blue': '0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue)',
+        'glow': '0 0 20px color-mix(in srgb, var(--cyber-cyan) 50%, transparent)',
       },
       animation: {
         'glitch': 'glitch 0.3s infinite',

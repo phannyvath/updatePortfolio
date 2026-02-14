@@ -2,17 +2,21 @@ import { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
+import { useTheme } from '../context/ThemeContext'
 
-// Static Astronaut Component (no animation, stays still)
+// Static Astronaut (dark mode)
 const StaticAstronaut = () => {
   const { scene } = useGLTF('/astronaut.glb')
-
   return (
-    <primitive 
-      object={scene} 
-      position={[0, 0, 0]} 
-      scale={0.3}
-    />
+    <primitive object={scene} position={[0, 0, 0]} scale={0.3} />
+  )
+}
+
+// Lil Bird Man (light mode)
+const StaticLilBirdMan = () => {
+  const { scene } = useGLTF('/lil_bird_man.glb')
+  return (
+    <primitive object={scene} position={[0, 0, 0]} scale={0.65} />
   )
 }
 
@@ -83,28 +87,22 @@ const FloatingCube = ({ position, color }) => {
   )
 }
 
-// Astronaut Scene (for inside the card) - Keep soft white lighting for astronaut
+// 3D Scene inside the card: astronaut (dark) or lil_bird_man (light)
 const AstronautScene = () => {
+  const { theme } = useTheme()
   return (
     <>
-      {/* Soft, even studio-like lighting for astronaut (keep same as before) */}
       <ambientLight intensity={1.2} color="#ffffff" />
-      
-      {/* Multiple directional lights for even, soft illumination */}
       <directionalLight position={[5, 5, 5]} intensity={0.8} color="#ffffff" />
       <directionalLight position={[-5, 5, 5]} intensity={0.6} color="#ffffff" />
       <directionalLight position={[0, 5, -5]} intensity={0.5} color="#ffffff" />
       <directionalLight position={[0, -5, 5]} intensity={0.4} color="#ffffff" />
-      
-      {/* Additional fill lights for even coverage */}
       <pointLight position={[0, 3, 3]} intensity={0.5} color="#ffffff" />
       <pointLight position={[0, -2, 3]} intensity={0.3} color="#ffffff" />
 
-      {/* Cyberpunk Background Elements */}
       <CyberpunkBackgroundScene />
 
-      {/* Static Astronaut - stays still, can be rotated 360° with OrbitControls */}
-      <StaticAstronaut />
+      {theme === 'light' ? <StaticLilBirdMan /> : <StaticAstronaut />}
     </>
   )
 }
@@ -116,31 +114,31 @@ const NoDemoPage = ({ onClose }) => {
   return (
     <div
       ref={pageRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm"
       onClick={onClose}
     >
 
-      {/* Content Overlay */}
+      {/* Content Overlay - compact */}
       <div
-        className="relative z-10 max-w-4xl w-full px-8 py-12 text-center pointer-events-auto"
+        className="relative z-10 max-w-lg w-full px-4 py-6 text-center pointer-events-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Cyberpunk Grid Overlay */}
         <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none" />
 
         {/* Main Content Card */}
-        <div className="relative border-2 border-cyber-cyan/50 bg-cyber-darker/90 backdrop-blur-md p-10 md:p-16 shadow-[0_0_40px_rgba(250,204,21,0.3)]">
+        <div className="relative border-2 border-cyber-cyan/50 bg-cyber-darker/90 backdrop-blur-md p-6 md:p-8 shadow-[0_0_40px_rgba(250,204,21,0.3)]">
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-cyber-cyan hover:text-cyber-red text-3xl font-bold transition-colors z-20"
+            className="absolute top-2 right-2 text-cyber-cyan hover:text-cyber-red text-2xl font-bold transition-colors z-20 w-8 h-8 flex items-center justify-center"
             style={{ textShadow: '0 0 10px currentColor' }}
           >
             ×
           </button>
 
           {/* Astronaut Canvas - Inside the Card */}
-          <div className="relative w-full h-64 md:h-80 mb-8 rounded-lg overflow-hidden border border-cyber-cyan/30 bg-black">
+          <div className="relative w-full h-44 md:h-52 mb-5 rounded-lg overflow-hidden border border-cyber-cyan/30 bg-black">
             <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
               {/* Cyberpunk background lighting for grid and cubes */}
               <ambientLight intensity={0.3} />
@@ -158,10 +156,10 @@ const NoDemoPage = ({ onClose }) => {
           </div>
 
           {/* Error Icon */}
-          <div className="mb-6 flex justify-center">
+          <div className="mb-3 flex justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-16 w-16 md:h-20 md:w-20 text-cyber-magenta"
+              className="h-10 w-10 md:h-12 md:w-12 text-cyber-magenta"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -178,12 +176,12 @@ const NoDemoPage = ({ onClose }) => {
 
           {/* Title */}
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-cyber-cyan glitch-text"
+            className="text-xl md:text-2xl font-bold mb-3 text-cyber-cyan glitch-text"
             data-text="NO DEMO AVAILABLE"
             style={{
               textShadow: '0 0 20px rgba(250, 204, 21, 0.8)',
               fontFamily: 'Orbitron, sans-serif',
-              letterSpacing: '0.1em',
+              letterSpacing: '0.08em',
             }}
           >
             NO DEMO AVAILABLE
@@ -191,7 +189,7 @@ const NoDemoPage = ({ onClose }) => {
 
           {/* Message */}
           <p
-            className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 font-mono leading-relaxed"
+            className="text-sm md:text-base mb-4 text-gray-300 font-mono leading-relaxed"
             style={{
               textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
             }}
@@ -207,8 +205,8 @@ const NoDemoPage = ({ onClose }) => {
           </p>
 
           {/* Additional Info */}
-          <div className="mt-8 pt-8 border-t border-cyber-cyan/30">
-            <p className="text-sm text-gray-400 font-mono">
+          <div className="mt-4 pt-4 border-t border-cyber-cyan/30">
+            <p className="text-xs text-gray-400 font-mono">
               This system requires authentication and is only accessible to authorized personnel.
             </p>
           </div>
@@ -216,7 +214,7 @@ const NoDemoPage = ({ onClose }) => {
           {/* Back Button */}
           <button
             onClick={onClose}
-            className="mt-8 px-8 py-3 border-2 border-cyber-cyan text-cyber-cyan font-mono text-lg hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300"
+            className="mt-5 px-5 py-2 border-2 border-cyber-cyan text-cyber-cyan font-mono text-sm hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300"
             style={{
               textShadow: '0 0 10px #facc15',
               boxShadow: '0 0 20px rgba(250, 204, 21, 0.3)',
@@ -230,7 +228,8 @@ const NoDemoPage = ({ onClose }) => {
   )
 }
 
-// Preload the astronaut model
+// Preload both models (astronaut = dark, lil_bird_man = light)
 useGLTF.preload('/astronaut.glb')
+useGLTF.preload('/lil_bird_man.glb')
 
 export default NoDemoPage

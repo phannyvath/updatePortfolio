@@ -10,6 +10,12 @@
     <title>Cyberpunk Portfolio</title>
   </head>
   <body>
+    <script>
+      (function() {
+        var t = localStorage.getItem('vath2077-theme');
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

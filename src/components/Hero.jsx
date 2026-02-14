@@ -1,9 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { useTheme } from '../context/ThemeContext'
 import SpaceBackground from './SpaceBackground'
+import SkyWithClouds from './SkyWithClouds'
+import LightModePlane from './LightModePlane'
 
 const Hero = () => {
+  const { theme } = useTheme()
   const heroRef = useRef(null)
   const titleRef = useRef(null)
   const subtitleRef = useRef(null)
@@ -42,22 +46,50 @@ const Hero = () => {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-cyber-dark"
       style={{ position: 'relative' }}
     >
-      {/* Cyberpunk Grid Background */}
+      {/* Grid: theme-aware (yellow dark / blue light) */}
       <div className="fixed inset-0 cyber-grid opacity-20 pointer-events-none" style={{ zIndex: 0 }} />
-      
-      {/* Space Background with Spaceship – static; only OrbitControls moves it when you drag */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-          <SpaceBackground />
-          {/* Rotate only; no zoom in/out */}
-          <OrbitControls
-            enableZoom={false}
-            enableRotate={true}
-            enablePan={false}
-            autoRotate={false}
-          />
-        </Canvas>
-      </div>
+
+      {/* Dark: space + stars + spaceship. Light: blue sky + float plane */}
+      {theme === 'light' ? (
+        <>
+          <SkyWithClouds />
+          <div className="absolute inset-0 z-0 w-full min-h-screen" style={{ height: '100%' }}>
+            <Canvas
+              camera={{ position: [0, 0, 8], fov: 60 }}
+              gl={{ antialias: true, alpha: true }}
+              style={{ width: '100%', height: '100%', display: 'block' }}
+            >
+              <Suspense fallback={null}>
+                <LightModePlane />
+              </Suspense>
+              <OrbitControls
+                enableZoom={false}
+                enableRotate={true}
+                enablePan={false}
+                autoRotate={false}
+              />
+            </Canvas>
+          </div>
+        </>
+      ) : (
+        <div className="absolute inset-0 z-0 w-full min-h-screen" style={{ height: '100%' }}>
+          <Canvas
+            camera={{ position: [0, 0, 8], fov: 60 }}
+            gl={{ antialias: true, alpha: false }}
+            style={{ width: '100%', height: '100%', display: 'block' }}
+          >
+            <Suspense fallback={null}>
+              <SpaceBackground />
+            </Suspense>
+            <OrbitControls
+              enableZoom={false}
+              enableRotate={true}
+              enablePan={false}
+              autoRotate={false}
+            />
+          </Canvas>
+        </div>
+      )}
 
       {/* Content Container – simple overlays */}
       <div className="relative z-10 w-full flex flex-col items-center justify-between min-h-screen py-20 px-6 pointer-events-none">
@@ -66,7 +98,7 @@ const Hero = () => {
           ref={titleRef}
           className="text-6xl md:text-8xl lg:text-9xl font-bold mb-12 text-center"
           style={{ 
-            color: '#facc15',
+            color: 'var(--cyber-cyan)',
             textShadow: '0 0 20px rgba(255,255,255,0.8)',
             fontFamily: 'Orbitron, sans-serif',
             letterSpacing: '0.15em',
@@ -80,8 +112,8 @@ const Hero = () => {
           <p 
             className="text-2xl md:text-3xl lg:text-4xl font-mono text-center" 
             style={{ 
-              color: '#facc15',
-              textShadow: '0 0 18px rgba(250,204,21,0.9)',
+              color: 'var(--cyber-cyan)',
+              textShadow: '0 0 18px var(--cyber-cyan)',
               fontWeight: '600',
             }}
           >
@@ -117,8 +149,8 @@ const Hero = () => {
             }}
             className="px-8 py-4 bg-transparent border-2 border-cyber-cyan text-cyber-cyan font-mono text-lg hover:bg-cyber-cyan hover:text-cyber-dark transition-all duration-300 hover:scale-110 relative overflow-hidden"
             style={{
-              textShadow: '0 0 10px #facc15',
-              boxShadow: '0 0 20px rgba(250, 204, 21, 0.3)',
+              textShadow: '0 0 10px var(--cyber-cyan)',
+              boxShadow: '0 0 20px color-mix(in srgb, var(--cyber-cyan) 30%, transparent)',
               opacity: 1,
             }}
           >
@@ -133,7 +165,7 @@ const Hero = () => {
             className="px-8 py-4 bg-cyber-cyan text-cyber-dark font-mono text-lg hover:bg-cyber-blue transition-all duration-300 hover:scale-110 relative overflow-hidden"
             style={{
               textShadow: '0 0 10px rgba(0,0,0,0.5)',
-              boxShadow: '0 0 20px rgba(250, 204, 21, 0.5)',
+              boxShadow: '0 0 20px color-mix(in srgb, var(--cyber-cyan) 50%, transparent)',
               opacity: 1,
             }}
           >

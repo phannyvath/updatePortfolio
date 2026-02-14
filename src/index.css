@@ -2,19 +2,203 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========== Theme: Dark (default) ========== */
+:root,
+[data-theme="dark"] {
+  --cyber-cyan: #facc15;
+  --cyber-blue: #a855f7;
+  --cyber-magenta: #fb7185;
+  --cyber-purple: #c084fc;
+  --cyber-green: #facc15;
+  --cyber-red: #fb7185;
+  --cyber-dark: #05030a;
+  --cyber-darker: #020107;
+  --cyber-navy: #12051f;
+  --cyber-btn-on-accent: #020107;
+  --cyber-glow-rgb: 250, 204, 21;
+}
+
+/* ========== Theme: Light (tech palette: blue, teal, coral, violet) ========== */
+[data-theme="light"] {
+  --cyber-cyan: #2563eb;
+  --cyber-blue: #1d4ed8;
+  --cyber-magenta: #0d9488;
+  --cyber-purple: #7c3aed;
+  --cyber-green: #059669;
+  --cyber-red: #dc2626;
+  --cyber-dark: #f0f9ff;
+  --cyber-darker: #e0f2fe;
+  --cyber-navy: #f8fafc;
+  --cyber-btn-on-accent: #ffffff;
+  --cyber-glow-rgb: 37, 99, 235;
+  /* Light-only: extended palette */
+  --light-primary: #2563eb;
+  --light-primary-hover: #1d4ed8;
+  --light-accent-teal: #0d9488;
+  --light-accent-teal-hover: #0f766e;
+  --light-accent-coral: #dc2626;
+  --light-accent-coral-hover: #b91c1c;
+  --light-accent-violet: #7c3aed;
+  --light-accent-violet-hover: #6d28d9;
+  --light-surface: #ffffff;
+  --light-surface-elevated: #f8fafc;
+  --light-border: rgba(37, 99, 235, 0.2);
+  --light-border-strong: rgba(37, 99, 235, 0.45);
+  --light-shadow: 0 4px 24px rgba(37, 99, 235, 0.08);
+  --light-shadow-hover: 0 8px 32px rgba(37, 99, 235, 0.15);
+  --light-glow: 0 0 20px rgba(37, 99, 235, 0.25);
+}
+
+/* Light theme: ensure text is visible on light backgrounds */
+[data-theme="light"] .text-white {
+  color: #0f172a;
+}
+[data-theme="light"] .text-gray-300,
+[data-theme="light"] .text-slate-300 {
+  color: #334155;
+}
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-slate-400 {
+  color: #475569;
+}
+[data-theme="light"] .text-gray-500,
+[data-theme="light"] .text-slate-500 {
+  color: #64748b;
+}
+[data-theme="light"] .placeholder-gray-500::placeholder {
+  color: #64748b;
+}
+
+/* ========== Light mode: Contact / "Message me" section – light surfaces, readable text ========== */
+[data-theme="light"] #contact .bg-cyber-darker,
+[data-theme="light"] #contact .bg-cyber-darker\/50,
+[data-theme="light"] #mobile-contact .bg-cyber-darker\/80,
+[data-theme="light"] #mobile-contact .bg-cyber-darker\/60,
+[data-theme="light"] #mobile-contact .bg-cyber-navy\/80 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(13, 148, 136, 0.25) !important;
+}
+
+[data-theme="light"] #contact input,
+[data-theme="light"] #contact textarea,
+[data-theme="light"] #mobile-contact input,
+[data-theme="light"] #mobile-contact textarea {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: rgba(13, 148, 136, 0.3) !important;
+}
+[data-theme="light"] #contact input::placeholder,
+[data-theme="light"] #contact textarea::placeholder,
+[data-theme="light"] #mobile-contact input::placeholder,
+[data-theme="light"] #mobile-contact textarea::placeholder {
+  color: #64748b !important;
+}
+[data-theme="light"] #contact input:focus,
+[data-theme="light"] #contact textarea:focus,
+[data-theme="light"] #mobile-contact input:focus,
+[data-theme="light"] #mobile-contact textarea:focus {
+  border-color: #0d9488 !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15), 0 0 20px rgba(13, 148, 136, 0.08) !important;
+}
+
+[data-theme="light"] #contact label,
+[data-theme="light"] #mobile-contact .text-gray-400,
+[data-theme="light"] #mobile-contact .text-gray-500 {
+  color: #475569 !important;
+}
+
+[data-theme="light"] #contact h2.text-cyber-cyan,
+[data-theme="light"] #mobile-contact h2 {
+  color: #0d9488 !important;
+  text-shadow: 0 0 20px rgba(13, 148, 136, 0.4) !important;
+}
+
+[data-theme="light"] #contact .holographic,
+[data-theme="light"] #mobile-contact .rounded-2xl.border.border-cyber-cyan\/20 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(13, 148, 136, 0.2) !important;
+}
+
+[data-theme="light"] #contact .terminal-text,
+[data-theme="light"] #contact .text-gray-300 {
+  color: #334155 !important;
+}
+
+/* Contact section primary button → teal in light mode (fits "message me" block) */
+[data-theme="light"] #contact .btn-primary,
+[data-theme="light"] #mobile-contact .btn-primary,
+[data-theme="light"] #contact button[type="submit"].bg-cyber-cyan,
+[data-theme="light"] #contact button[type="submit"] {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.35), 0 0 24px rgba(13, 148, 136, 0.2) !important;
+}
+[data-theme="light"] #contact button[type="submit"]:hover:not(:disabled),
+[data-theme="light"] #mobile-contact .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%) !important;
+  box-shadow: 0 6px 28px rgba(13, 148, 136, 0.4), 0 0 30px rgba(13, 148, 136, 0.25) !important;
+}
+
 @layer base {
   * {
     @apply border-cyber-navy;
   }
-  
+
   body {
-    @apply bg-cyber-dark text-cyber-blue font-futuristic;
+    @apply text-cyber-blue font-futuristic;
     overflow-x: hidden;
+  }
+
+  body {
+    background: #05030a;
+  }
+
+  /* Light: futuristic blue-tinted background (like dark mode but light) */
+  [data-theme="light"] body {
+    background: linear-gradient(
+      165deg,
+      #f0f9ff 0%,
+      #e0f2fe 25%,
+      #f0f9ff 50%,
+      #dbeafe 75%,
+      #eff6ff 100%
+    );
+    background-attachment: fixed;
+  }
+
+  [data-theme="light"] body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  [data-theme="light"] body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 100% 80% at 50% -20%,
+      rgba(59, 130, 246, 0.12) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
   }
 
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Mobile bottom nav safe area (e.g. iOS home indicator) */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 @layer utilities {
@@ -27,19 +211,23 @@
   }
 
   .cyber-grid {
-    background-image: 
+    background-image:
       linear-gradient(rgba(250, 204, 21, 0.12) 1px, transparent 1px),
       linear-gradient(90deg, rgba(250, 204, 21, 0.12) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 
-  /* Scanline - no animation (was causing lag) */
+  [data-theme="light"] .cyber-grid {
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.15) 1px, transparent 1px);
+  }
+
   .scanline-effect {
     position: relative;
     overflow: hidden;
   }
 
-  /* Holographic - no backdrop-filter for performance */
   .holographic {
     background: linear-gradient(
       135deg,
@@ -51,20 +239,325 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
 
-  /* Glitch text - static shadow only, no animation */
+  [data-theme="light"] .holographic {
+    background: linear-gradient(
+      135deg,
+      rgba(37, 99, 235, 0.06) 0%,
+      rgba(59, 130, 246, 0.06) 50%,
+      rgba(29, 78, 216, 0.06) 100%
+    );
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
   .glitch-text {
     position: relative;
   }
 
-  /* Terminal/Console Style */
   .terminal-text {
     font-family: 'Share Tech Mono', monospace;
-    color: #facc15;
-    text-shadow: 0 0 10px rgba(250, 204, 21, 0.8);
+    color: var(--cyber-cyan);
+    text-shadow: 0 0 10px var(--cyber-cyan);
   }
 
   .terminal-cursor::after {
     content: '_';
     opacity: 0.8;
   }
+
+  /* Mobile layout background: theme-aware, futuristic */
+  .mobile-layout-bg {
+    background: linear-gradient(
+      180deg,
+      var(--cyber-dark) 0%,
+      var(--cyber-navy) 25%,
+      var(--cyber-darker) 50%,
+      var(--cyber-navy) 75%,
+      var(--cyber-darker) 100%
+    );
+  }
+
+  [data-theme="light"] .mobile-layout-bg {
+    background: linear-gradient(
+      180deg,
+      #f0f9ff 0%,
+      #e0f2fe 20%,
+      #dbeafe 40%,
+      #eff6ff 60%,
+      #e0f2fe 80%,
+      #f0f9ff 100%
+    );
+    background-attachment: scroll;
+  }
+
+  .no-demo-mobile-shadow {
+    box-shadow: 0 0 30px color-mix(in srgb, var(--cyber-cyan) 25%, transparent);
+  }
+
+  .mobile-layout-grid {
+    opacity: 0.14;
+    background-image:
+      linear-gradient(rgba(250, 204, 21, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(250, 204, 21, 0.12) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  [data-theme="light"] .mobile-layout-grid {
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.12) 1px, transparent 1px);
+  }
+
+  .mobile-layout-vignette {
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(2, 1, 7, 0.6) 100%);
+  }
+
+  [data-theme="light"] .mobile-layout-vignette {
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 50%, rgba(37, 99, 235, 0.08) 100%);
+  }
+}
+
+/* ========== Light mode: Hero blue sky + clouds ========== */
+.hero-sky-bg {
+  background: linear-gradient(180deg, #0ea5e9 0%, #38bdf8 25%, #7dd3fc 50%, #bae6fd 75%, #e0f2fe 100%);
+}
+
+.cloud-layer {
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  filter: blur(1px);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+}
+.cloud-1 { width: 120px; height: 40px; top: 15%; left: 10%; border-radius: 120px / 40px; animation: cloud-drift 25s ease-in-out infinite; }
+.cloud-2 { width: 180px; height: 50px; top: 25%; right: 15%; border-radius: 180px / 50px; animation: cloud-drift 30s ease-in-out infinite 2s; }
+.cloud-3 { width: 100px; height: 35px; top: 45%; left: 25%; border-radius: 100px / 35px; animation: cloud-drift 22s ease-in-out infinite 4s; }
+.cloud-4 { width: 140px; height: 45px; top: 60%; right: 20%; border-radius: 140px / 45px; animation: cloud-drift 28s ease-in-out infinite 1s; }
+.cloud-5 { width: 90px; height: 30px; top: 35%; left: 60%; border-radius: 90px / 30px; animation: cloud-drift 26s ease-in-out infinite 3s; }
+.cloud-6 { width: 160px; height: 48px; top: 70%; left: 50%; border-radius: 160px / 48px; animation: cloud-drift 32s ease-in-out infinite 5s; }
+
+@keyframes cloud-drift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+/* Light: Hero section shows sky (no solid bg) */
+[data-theme="light"] #hero,
+[data-theme="light"] #mobile-hero {
+  background: transparent !important;
+}
+
+/* Light: hero title darker blue so readable on sky */
+[data-theme="light"] #hero h1,
+[data-theme="light"] #mobile-hero h1 {
+  color: #1e40af !important;
+  text-shadow: 0 0 24px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.12) !important;
+}
+[data-theme="light"] #hero .font-mono,
+[data-theme="light"] #mobile-hero .font-mono {
+  color: #1d4ed8 !important;
+}
+
+/* Light: black/dark backgrounds → white or gray */
+[data-theme="light"] .bg-black {
+  background-color: #f1f5f9 !important;
+}
+[data-theme="light"] .bg-black\/40,
+[data-theme="light"] .bg-black\/50 {
+  background-color: rgba(241, 245, 249, 0.9) !important;
+}
+
+[data-theme="light"] .text-cyber-dark {
+  color: #0f172a;
+}
+
+/* Light: let body futuristic background show through app root */
+[data-theme="light"] .app-root {
+  background: transparent;
+}
+
+/* Light theme: force all cyan/yellow accents to blue */
+[data-theme="light"] .text-cyber-cyan {
+  color: #2563eb !important;
+  text-shadow: 0 0 10px #2563eb, 0 0 20px rgba(37, 99, 235, 0.5) !important;
+}
+[data-theme="light"] .border-cyber-cyan,
+[data-theme="light"] .border-cyber-cyan\/30,
+[data-theme="light"] .border-cyber-cyan\/40,
+[data-theme="light"] .border-cyber-cyan\/50 {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+}
+[data-theme="light"] .bg-cyber-cyan {
+  background-color: #2563eb !important;
+}
+[data-theme="light"] nav [style*="color"] {
+  color: #2563eb !important;
+}
+[data-theme="light"] nav span[style*="background"][style*="gradient"] {
+  background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 50%, #2563eb 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 0 8px #2563eb) drop-shadow(0 0 16px #1d4ed8) !important;
+}
+[data-theme="light"] .shadow-neon-cyan,
+[data-theme="light"] .bottom-0.5.bg-cyber-cyan {
+  box-shadow: 0 0 10px #2563eb, 0 0 20px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* ========== Light mode: buttons, hover, focus (professional & futuristic) ========== */
+
+/* Primary buttons: fill (e.g. Send, CTA) and gradient primary */
+[data-theme="light"] button.bg-cyber-cyan,
+[data-theme="light"] a.bg-cyber-cyan,
+[data-theme="light"] .btn-primary {
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+[data-theme="light"] button.bg-cyber-cyan:hover:not(:disabled),
+[data-theme="light"] a.bg-cyber-cyan:hover,
+[data-theme="light"] .btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+  box-shadow: 0 6px 24px rgba(29, 78, 216, 0.35), 0 0 30px rgba(37, 99, 235, 0.2) !important;
+}
+[data-theme="light"] button.bg-cyber-cyan:active:not(:disabled),
+[data-theme="light"] a.bg-cyber-cyan:active,
+[data-theme="light"] .btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Outline / border-only buttons (e.g. "Go back", nav theme toggle) */
+[data-theme="light"] button.border-cyber-cyan:not(.bg-cyber-cyan),
+[data-theme="light"] button.border-2.border-cyber-cyan,
+[data-theme="light"] a.border-2.border-cyber-cyan {
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[data-theme="light"] button.border-cyber-cyan:hover:not(.bg-cyber-cyan),
+[data-theme="light"] button.border-2.border-cyber-cyan:hover,
+[data-theme="light"] a.border-2.border-cyber-cyan:hover {
+  background: rgba(37, 99, 235, 0.08) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Theme toggle (nav + mobile) */
+[data-theme="light"] nav button.rounded-lg.border-cyber-cyan:hover,
+[data-theme="light"] button.rounded-xl.border-2.border-cyber-cyan:hover {
+  background: rgba(37, 99, 235, 0.12) !important;
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Mobile bottom nav: light mode only – active (clicked) tab = white */
+[data-theme="light"] .mobile-nav-item-active {
+  color: #ffffff !important;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Nav links hover */
+[data-theme="light"] nav button.text-gray-400:hover {
+  color: #2563eb !important;
+  text-shadow: 0 0 12px rgba(37, 99, 235, 0.5) !important;
+}
+
+/* Inputs: focus ring and shadow */
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2), 0 0 20px rgba(37, 99, 235, 0.08) !important;
+  outline: none !important;
+}
+
+/* Cards / holographic panels: hover */
+[data-theme="light"] .holographic:hover,
+[data-theme="light"] [class*="border-cyber-cyan"][class*="hover:border-cyber-cyan"]:hover {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  box-shadow: var(--light-shadow-hover), 0 0 24px rgba(37, 99, 235, 0.12) !important;
+}
+
+/* Shadow glow utility in light */
+[data-theme="light"] .hover\:shadow-glow:hover,
+[data-theme="light"] .focus\:shadow-glow:focus {
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2), 0 0 40px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* Social / link cards (e.g. MobileContact grid) */
+[data-theme="light"] a.border-cyber-blue:hover,
+[data-theme="light"] a[class*="border-cyber"]:hover {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Hero CTA buttons (desktop) */
+[data-theme="light"] .group.border-2.border-cyber-cyan:hover {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 24px rgba(37, 99, 235, 0.25) !important;
+}
+[data-theme="light"] .group.bg-cyber-cyan:hover {
+  background: #1d4ed8 !important;
+  box-shadow: 0 6px 28px rgba(29, 78, 216, 0.3) !important;
+}
+
+/* No demo modal: icon + text glow (dark = magenta, light = teal) */
+.no-demo-icon-glow {
+  filter: drop-shadow(0 0 8px #fb7185);
+}
+.no-demo-magenta-glow {
+  text-shadow: 0 0 8px #fb7185;
+}
+[data-theme="light"] .no-demo-icon-glow {
+  filter: drop-shadow(0 0 10px #0d9488) !important;
+}
+[data-theme="light"] .no-demo-magenta-glow {
+  text-shadow: 0 0 8px rgba(13, 148, 136, 0.7) !important;
+}
+
+/* Light: secondary outline buttons → teal (View Projects, Go back) */
+[data-theme="light"] .btn-secondary {
+  border-color: #0d9488 !important;
+  color: #0d9488 !important;
+  box-shadow: 0 0 16px rgba(13, 148, 136, 0.2) !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+[data-theme="light"] .btn-secondary:hover {
+  background: rgba(13, 148, 136, 0.1) !important;
+  border-color: #0f766e !important;
+  color: #0f766e !important;
+  box-shadow: 0 0 24px rgba(13, 148, 136, 0.3) !important;
+}
+
+/* Light: close / danger button → coral */
+[data-theme="light"] .btn-close-light {
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+[data-theme="light"] .btn-close-light:hover {
+  background: rgba(220, 38, 38, 0.1) !important;
+  box-shadow: 0 0 16px rgba(220, 38, 38, 0.25) !important;
+}
+
+/* Light: section labels (e.g. > SEND_MESSAGE) use teal via --cyber-magenta */
+[data-theme="light"] .text-cyber-magenta {
+  color: #0d9488 !important;
+  text-shadow: 0 0 10px rgba(13, 148, 136, 0.4) !important;
+}
+
+/* Light: social/link cards – teal border and icon glow */
+[data-theme="light"] a.border-cyber-blue\/30,
+[data-theme="light"] a[class*="border-cyber"][class*="bg-cyber-darker"] {
+  border-color: rgba(13, 148, 136, 0.35) !important;
+  box-shadow: 0 4px 20px rgba(13, 148, 136, 0.1) !important;
+}
+[data-theme="light"] a.border-cyber-blue\/30:hover,
+[data-theme="light"] a[class*="border-cyber"]:hover {
+  border-color: rgba(13, 148, 136, 0.6) !important;
+  box-shadow: 0 6px 24px rgba(13, 148, 136, 0.2) !important;
+}
+[data-theme="light"] a.border-cyber-blue\/30 .text-cyber-cyan,
+[data-theme="light"] a[class*="border-cyber"] .text-cyber-cyan {
+  color: #0d9488 !important;
+  text-shadow: 0 0 10px rgba(13, 148, 136, 0.5) !important;
 }

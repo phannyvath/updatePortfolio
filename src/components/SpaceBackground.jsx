@@ -1,20 +1,24 @@
+import { useMemo } from 'react'
 import { Stars, useGLTF } from '@react-three/drei'
 
-// Simple, static space scene:
-// - Black background (from page)
-// - White stars
-// - Yellow spaceship in the center
-// Nothing moves automatically; only OrbitControls (in Hero) can rotate/zoom.
+// Simple space scene: stars + yellow spaceship. Clone scene so each Canvas has its own copy.
 const SpaceBackground = () => {
   const { scene } = useGLTF('/yellow_spaceship.glb')
+  const clonedScene = useMemo(() => {
+    const clone = scene.clone()
+    clone.traverse((node) => {
+      if (node.isMesh && node.material) {
+        node.material = node.material.clone()
+      }
+    })
+    return clone
+  }, [scene])
 
   return (
     <>
-      {/* Neutral white lighting */}
       <ambientLight intensity={0.6} color="#ffffff" />
       <directionalLight position={[5, 5, 5]} intensity={1} color="#ffffff" />
 
-      {/* Starfield – reduced count/speed for performance */}
       <Stars
         radius={280}
         depth={200}
@@ -25,8 +29,7 @@ const SpaceBackground = () => {
         speed={1}
       />
 
-      {/* Yellow spaceship model, centered */}
-      <primitive object={scene} position={[0, 0, 0]} scale={1.0} />
+      <primitive object={clonedScene} position={[0, 0, 0]} scale={1} />
     </>
   )
 }
