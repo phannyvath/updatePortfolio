@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-cyber-navy;
+  }
+  
+  body {
+    @apply bg-cyber-dark text-cyber-blue font-futuristic;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+
+  .border-glow {
+    box-shadow: 0 0 10px currentColor, inset 0 0 10px currentColor;
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(250, 204, 21, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(250, 204, 21, 0.12) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Scanline - no animation (was causing lag) */
+  .scanline-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Holographic - no backdrop-filter for performance */
+  .holographic {
+    background: linear-gradient(
+      135deg,
+      rgba(250, 204, 21, 0.08) 0%,
+      rgba(168, 85, 247, 0.08) 50%,
+      rgba(251, 113, 133, 0.08) 100%
+    );
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Glitch text - static shadow only, no animation */
+  .glitch-text {
+    position: relative;
+  }
+
+  /* Terminal/Console Style */
+  .terminal-text {
+    font-family: 'Share Tech Mono', monospace;
+    color: #facc15;
+    text-shadow: 0 0 10px rgba(250, 204, 21, 0.8);
+  }
+
+  .terminal-cursor::after {
+    content: '_';
+    opacity: 0.8;
+  }
+}
