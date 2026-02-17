@@ -1,8 +1,23 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { useTheme } from '../context/ThemeContext'
 
 const SplashScreen = ({ onComplete }) => {
   const containerRef = useRef(null)
+  const { theme } = useTheme()
+  const isLight = theme === 'light'
+
+  // Light mode: blue accent. Dark: yellow
+  const titleColor = isLight ? '#2563eb' : '#facc15'
+  const titleShadow = isLight
+    ? '0 0 30px rgba(37, 99, 235, 0.9), 0 0 60px rgba(37, 99, 235, 0.7), 0 0 90px rgba(37, 99, 235, 0.5)'
+    : '0 0 30px rgba(250, 204, 21, 0.8), 0 0 60px rgba(250, 204, 21, 0.6)'
+  const titleShadowStrong = isLight
+    ? '0 0 40px rgba(37, 99, 235, 1), 0 0 80px rgba(37, 99, 235, 0.8), 0 0 120px rgba(37, 99, 235, 0.6)'
+    : '0 0 40px rgba(250, 204, 21, 1), 0 0 80px rgba(250, 204, 21, 0.8), 0 0 120px rgba(250, 204, 21, 0.6)'
+  const welcomeShadow = isLight
+    ? '0 0 30px rgba(37, 99, 235, 0.9), 0 0 60px rgba(37, 99, 235, 0.7)'
+    : '0 0 30px rgba(168, 85, 247, 1), 0 0 60px rgba(168, 85, 247, 0.8)'
 
   useEffect(() => {
     const timeline = gsap.timeline({
@@ -27,7 +42,7 @@ const SplashScreen = ({ onComplete }) => {
         ease: 'power3.out',
       })
       .to('.splash-title', {
-        textShadow: '0 0 40px rgba(250, 204, 21, 1), 0 0 80px rgba(250, 204, 21, 0.8), 0 0 120px rgba(250, 204, 21, 0.6)',
+        textShadow: titleShadowStrong,
         duration: 0.5,
       })
       .to('.splash-title', {
@@ -79,7 +94,7 @@ const SplashScreen = ({ onComplete }) => {
       })
       .to('.splash-welcome', {
         scale: 1.05,
-        textShadow: '0 0 30px rgba(168, 85, 247, 1), 0 0 60px rgba(168, 85, 247, 0.8)',
+        textShadow: welcomeShadow,
         duration: 0.3,
         yoyo: true,
         repeat: 1,
@@ -93,7 +108,7 @@ const SplashScreen = ({ onComplete }) => {
         opacity: 0,
         duration: 0.6,
       })
-  }, [onComplete])
+  }, [onComplete, titleShadowStrong, welcomeShadow])
 
   return (
     <div
@@ -149,8 +164,8 @@ const SplashScreen = ({ onComplete }) => {
           className="splash-title text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-center opacity-0 scale-90 glitch-text w-full"
           data-text="IM PHANNYVATH"
           style={{
-            color: '#facc15',
-            textShadow: '0 0 30px rgba(250, 204, 21, 0.8), 0 0 60px rgba(250, 204, 21, 0.6)',
+            color: titleColor,
+            textShadow: titleShadow,
             fontFamily: 'Orbitron, sans-serif',
             letterSpacing: '0.1em',
             lineHeight: '1.1',
@@ -200,8 +215,8 @@ const SplashScreen = ({ onComplete }) => {
       <div
         className="splash-welcome absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center opacity-0 px-4 w-full max-w-4xl z-20"
         style={{
-          color: '#a855f7',
-          textShadow: '0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(168, 85, 247, 0.6)',
+          color: isLight ? '#2563eb' : '#a855f7',
+          textShadow: isLight ? '0 0 20px rgba(37, 99, 235, 0.8), 0 0 40px rgba(37, 99, 235, 0.6)' : '0 0 20px rgba(168, 85, 247, 0.8), 0 0 40px rgba(168, 85, 247, 0.6)',
           fontFamily: 'Orbitron, sans-serif',
           letterSpacing: '0.1em',
           lineHeight: '1.2',

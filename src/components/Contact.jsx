@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+const CONTACT_EMAIL = 'nyvathnyvath@gmail.com'
+
 const Contact = () => {
   const sectionRef = useRef(null)
   const formRef = useRef(null)
@@ -11,6 +13,7 @@ const Contact = () => {
     message: '',
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState(null)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -30,16 +33,19 @@ const Contact = () => {
     )
   }, [])
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setFormData({ name: '', email: '', message: '' })
-      alert('Message sent! (This is a demo)')
-    }, 2000)
+    setSubmitMessage(null)
+    const subject = encodeURIComponent(`Contact from ${formData.name} (${formData.email})`)
+    const body = encodeURIComponent(
+      `${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`
+    )
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+    window.location.href = mailto
+    setFormData({ name: '', email: '', message: '' })
+    setIsSubmitting(false)
+    setSubmitMessage('Your email client opened. Send the email to deliver your message.')
   }
 
   const handleChange = (e) => {
@@ -145,12 +151,17 @@ const Contact = () => {
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="animate-spin">⟳</span>
-                    SENDING...
+                    OPENING...
                   </span>
                 ) : (
                   'SEND MESSAGE →'
                 )}
               </button>
+              {submitMessage && (
+                <p className="mt-3 text-sm text-cyber-magenta font-mono text-center">
+                  {submitMessage}
+                </p>
+              )}
             </form>
           </div>
 

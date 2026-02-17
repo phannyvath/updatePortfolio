@@ -27,28 +27,28 @@ const Skills = () => {
 
   const skillCategories = {
     'Frontend': [
-      { name: 'React', level: 95, color: 'cyan' },
-      { name: 'TypeScript', level: 90, color: 'blue' },
-      { name: 'Next.js', level: 85, color: 'magenta' },
-      { name: 'Tailwind CSS', level: 95, color: 'cyan' },
+      { name: 'React', level: 70, color: 'cyan' },
+      { name: 'TypeScript', level: 70, color: 'blue' },
+      { name: 'Next.js', level: 60, color: 'magenta' },
+      { name: 'Tailwind CSS', level: 70, color: 'cyan' },
     ],
     'Backend': [
       { name: 'Node.js', level: 90, color: 'green' },
       { name: 'Python', level: 85, color: 'blue' },
-      { name: 'PostgreSQL', level: 80, color: 'cyan' },
       { name: 'MongoDB', level: 75, color: 'green' },
     ],
     'Tools': [
-      { name: 'Git', level: 95, color: 'magenta' },
-      { name: 'Docker', level: 80, color: 'blue' },
+      { name: 'Git', level: 90, color: 'magenta' },
+      { name: 'Vercel', level: 80, color: 'blue' },
       { name: 'AWS', level: 75, color: 'cyan' },
-      { name: 'CI/CD', level: 85, color: 'green' },
+       { name: 'Render', level: 75, color: 'cyan' },
+
     ],
     '3D & Graphics': [
-      { name: 'Three.js', level: 90, color: 'cyan' },
-      { name: 'Blender', level: 70, color: 'magenta' },
-      { name: 'WebGL', level: 85, color: 'blue' },
-      { name: 'GSAP', level: 95, color: 'green' },
+      { name: 'Three.js', level: 50, color: 'cyan' },
+      { name: 'Adobe illustrator', level: 40, color: 'magenta' },
+      { name: 'AdobeXD', level: 50, color: 'blue' },
+      { name: 'Figma', level: 50, color: 'green' },
     ],
   }
 

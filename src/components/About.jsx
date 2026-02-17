@@ -41,10 +41,9 @@ const About = () => {
   }, [])
 
   const stats = [
-    { label: 'Years Experience', value: '5+', color: 'cyan' },
-    { label: 'Projects Completed', value: '50+', color: 'magenta' },
-    { label: 'Technologies', value: '20+', color: 'blue' },
-    { label: 'Happy Clients', value: '30+', color: 'green' },
+    { label: 'Years Experience', value: '1+', color: 'cyan' },
+    { label: 'Projects Completed', value: '7+', color: 'magenta' },
+    { label: 'Technologies', value: '10+', color: 'blue' },
   ]
 
   return (

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const CONTACT_EMAIL = 'nyvathnyvath@gmail.com'
+
 const socialLinks = [
   { name: 'Telegram', url: 'https://t.me/Im_Phannyvath', icon: 'TG' },
   { name: 'GitHub', url: 'https://github.com/phannyvath', icon: 'GH' },
@@ -10,15 +12,21 @@ const socialLinks = [
 export default function MobileContact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [sending, setSending] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState(null)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setSending(true)
-    setTimeout(() => {
-      setSending(false)
-      setFormData({ name: '', email: '', message: '' })
-      alert('Message sent! (Demo)')
-    }, 1500)
+    setSubmitMessage(null)
+    const subject = encodeURIComponent(`Contact from ${formData.name} (${formData.email})`)
+    const body = encodeURIComponent(
+      `${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`
+    )
+    const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+    window.location.href = mailto
+    setFormData({ name: '', email: '', message: '' })
+    setSending(false)
+    setSubmitMessage('Your email client opened. Send the email to deliver your message.')
   }
 
   const handleChange = (e) => {
@@ -84,8 +92,13 @@ export default function MobileContact() {
                 boxShadow: '0 0 25px color-mix(in srgb, var(--cyber-cyan) 40%, transparent), 0 0 40px color-mix(in srgb, var(--cyber-blue) 20%, transparent)',
               }}
             >
-              {sending ? 'Sending...' : 'Send →'}
+              {sending ? 'Opening...' : 'Send →'}
             </button>
+            {submitMessage && (
+              <p className="mt-3 text-xs text-cyber-magenta font-mono text-center">
+                {submitMessage}
+              </p>
+            )}
           </form>
         </div>
 
