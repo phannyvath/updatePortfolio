@@ -15,7 +15,7 @@ const Hero = () => {
 
   // ✏️ CUSTOMIZE: Replace with your actual name and skill
   const yourName = 'ENEL'
-  const yourSkill = 'Full Stack Developers'
+  const yourSkill = 'Full Stack Developer'
 
   // Typing animation state for the skill line (word by word)
   const skillWords = yourSkill.split(' ')

@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-const CONTACT_EMAIL = 'nyvathnyvath@gmail.com'
+import { sendContactEmail } from '../lib/email'
 
 const Contact = () => {
   const sectionRef = useRef(null)
@@ -33,19 +32,21 @@ const Contact = () => {
     )
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
     setSubmitMessage(null)
-    const subject = encodeURIComponent(`Contact from ${formData.name} (${formData.email})`)
-    const body = encodeURIComponent(
-      `${formData.message}\n\n---\nFrom: ${formData.name}\nEmail: ${formData.email}`
-    )
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
-    window.location.href = mailto
-    setFormData({ name: '', email: '', message: '' })
-    setIsSubmitting(false)
-    setSubmitMessage('Your email client opened. Send the email to deliver your message.')
+
+    try {
+      await sendContactEmail(formData)
+      setFormData({ name: '', email: '', message: '' })
+      setSubmitMessage('Message sent successfully. I will reply soon.')
+    } catch (error) {
+      console.error('EmailJS send failed:', error)
+      setSubmitMessage('Message failed to send. Please try again or contact me on Telegram.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e) => {
@@ -151,7 +152,7 @@ const Contact = () => {
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="animate-spin">⟳</span>
-                    OPENING...
+                    SENDING...
                   </span>
                 ) : (
                   'SEND MESSAGE →'

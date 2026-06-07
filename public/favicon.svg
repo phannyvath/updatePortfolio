@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vath2077 logo">
+  <defs>
+    <linearGradient id="neon" x1="10" y1="8" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00f5ff"/>
+      <stop offset=".5" stop-color="#ffd400"/>
+      <stop offset="1" stop-color="#ff2bd6"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#070914"/>
+  <path d="M11 12h16l6 26 6-26h14L39 52H25L11 12Z" fill="url(#neon)" filter="url(#glow)"/>
+  <path d="M18 14h8l7 32 7-32h5L36 50h-8L18 14Z" fill="#070914" opacity=".7"/>
+  <path d="M43 38h11v5h-5v4h5v5H41v-8h5v-3h-3v-3Z" fill="#00f5ff"/>
+  <path d="M8 44h13v5H8zM47 10h8v5h-8zM9 9h6v6H9z" fill="#ffd400"/>
+</svg>
